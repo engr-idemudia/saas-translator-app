@@ -1,31 +1,23 @@
 import { initFirestore } from "@auth/firebase-adapter";
 import admin from "firebase-admin";
-// const serviceAccount = require("./serviceAccountKey.json");
 
-// const serviceAccount = JSON.parse(
-//   process.env.FIREBASE_SERVICE_ACCOUNT_KEY as string
-// );
+function getServiceAccount() {
+  const key = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+  if (!key) throw new Error("FIREBASE_SERVICE_ACCOUNT_KEY is not set");
+  return JSON.parse(key);
+}
 
-let app;
-
-if (!admin.apps.length) {
-  app = admin.initializeApp({
-    credential: admin.credential.cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    }),
+function getAdminApp() {
+  if (admin.apps.length > 0) return admin.apps[0]!;
+  return admin.initializeApp({
+    credential: admin.credential.cert(getServiceAccount()),
   });
 }
 
-const adminDb = initFirestore({
-  credential: admin.credential.cert({
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-  }),
+export function getAdminAuth() {
+  return admin.auth(getAdminApp());
+}
+
+export const adminDb = initFirestore({
+  credential: admin.credential.cert(getServiceAccount()),
 });
-
-const adminAuth = admin.auth(app);
-
-export { adminDb, adminAuth };

@@ -7,7 +7,7 @@ import type { NextAuthOptions } from "next-auth";
 import { getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { FirestoreAdapter } from "@auth/firebase-adapter";
-import { adminAuth, adminDb } from "./firebase-admin";
+import { getAdminAuth, adminDb } from "./firebase-admin";
 
 // You'll need to import and pass this
 // to `NextAuth` in `app/api/auth/[...nextauth]/route.ts`
@@ -28,7 +28,9 @@ export const authOptions: NextAuthOptions = {
           // Add firebase token to session
           // SOLUTION to firebase not syncing
           // https://github.com/nextauthjs/next-auth/discussions/7157
-          const firebaseToken = await adminAuth.createCustomToken(token.sub);
+          const firebaseToken = await getAdminAuth().createCustomToken(
+            token.sub,
+          );
           session.firebaseToken = firebaseToken;
         }
       }
