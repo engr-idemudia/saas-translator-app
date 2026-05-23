@@ -8,12 +8,12 @@ import { getFunctions } from "firebase/functions";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB-5au7ff76afp8fM4g9cFbCH7jZcrBQPc",
-  authDomain: "saas-translator-app-5523d.firebaseapp.com",
-  projectId: "saas-translator-app-5523d",
-  storageBucket: "saas-translator-app-5523d.firebasestorage.app",
-  messagingSenderId: "977165359661",
-  appId: "1:977165359661:web:7d5e559f232110ca6d76a4",
+  apiKey: "AIzaSyAFDpOTGUgA7qqnjZZE4CSkeidt_CucwQE",
+  authDomain: "saas-translator-app-44644.firebaseapp.com",
+  projectId: "saas-translator-app-44644",
+  storageBucket: "saas-translator-app-44644.firebasestorage.app",
+  messagingSenderId: "895782946554",
+  appId: "1:895782946554:web:a28de01b9fa5e349ca2b43",
 };
 
 // Initialize Firebase

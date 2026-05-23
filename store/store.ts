@@ -11,7 +11,8 @@ export type LanguagesSupported =
   | "la"
   | "ru"
   | "zh"
-  | "ar";
+  | "ar"
+  | "et";
 
 export const LanguagesSupportedMap: Record<LanguagesSupported, string> = {
   en: "English",
@@ -24,6 +25,7 @@ export const LanguagesSupportedMap: Record<LanguagesSupported, string> = {
   ru: "Russian",
   zh: "Mandarin",
   ar: "Arabic",
+  et: "Estonian",
 };
 
 interface LanguageState {
@@ -42,14 +44,16 @@ export const useLanguageStore = create<LanguageState>()((set, get) => ({
       return Object.keys(LanguagesSupportedMap) as LanguagesSupported[];
 
     // If not pro, return only the first two languages
-    return Object.keys(LanguagesSupportedMap).slice(
-      0,
-      2
-    ) as LanguagesSupported[];
+    // return Object.keys(LanguagesSupportedMap).slice(
+    //   0,
+    //   2,
+    // ) as LanguagesSupported[];
+    return Object.keys(LanguagesSupportedMap) as LanguagesSupported[]; //make all free for now
   },
   getNotSupportedLanguages: (isPro: boolean) => {
     if (isPro) return []; // No unsupported languages for "pro" users
-    return Object.keys(LanguagesSupportedMap).slice(2) as LanguagesSupported[]; // Excluding the first two supported languages
+    // return Object.keys(LanguagesSupportedMap).slice(2) as LanguagesSupported[];
+    return Object.keys(LanguagesSupportedMap) as LanguagesSupported[]; // Excluding the first two supported languages
   },
 }));
 

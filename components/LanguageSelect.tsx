@@ -55,18 +55,20 @@ function LanguageSelect() {
                     {LanguagesSupportedMap[language]}
                   </SelectItem>
                 ))}
-                {getNotSupportedLanguages(isPro).map((language) => (
-                  <Link href={"/register"} key={language} prefetch={false}>
-                    <SelectItem
-                      key={language}
-                      value={language}
-                      disabled
-                      className="bg-gray-300/50 text-gray-500 dark:text-white py-2 my-1"
-                    >
-                      {LanguagesSupportedMap[language]} (PRO)
-                    </SelectItem>
-                  </Link>
-                ))}
+                {/* PRO language restriction — re-enable when paywall is active
+                    {getNotSupportedLanguages(isPro).map((language) => (
+                      <Link href={"/register"} key={language} prefetch={false}>
+                        <SelectItem
+                          key={language}
+                          value={language}
+                          disabled
+                          className="bg-gray-300/50 text-gray-500 dark:text-white py-2 my-1"
+                        >
+                          {LanguagesSupportedMap[language]} (PRO)
+                        </SelectItem>
+                      </Link>
+                    ))}
+                    */}
               </>
             )}
           </SelectContent>

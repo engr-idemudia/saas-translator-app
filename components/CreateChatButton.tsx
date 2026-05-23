@@ -32,6 +32,8 @@ function CreateChatButton({ isLarge }: { isLarge?: boolean }) {
       description: "Hold tight while we create your new chat...",
       duration: 3000,
     });
+    // ADD THESE THREE LINES HERE ↓
+    console.log("Session user ID:", session.user.id);
 
     // We need to get the users current chats to check if they're about to exceed the PRO plan
     const chats = (

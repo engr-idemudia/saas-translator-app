@@ -1,6 +1,4 @@
 import Link from "next/link";
-import DemoGif from "@/images/landingPage/demo.gif";
-import Image from "next/image";
 
 export default function HomePage() {
   return (
@@ -23,17 +21,18 @@ export default function HomePage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-                Chat with Anyone, anywhere!
+                Chat Freely. Understand Every Language.
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-                You speak your language, they speak their language.{" "}
+                Have natural conversations with anyone, in any language.{" "}
+                <br className="hidden sm:block" />
                 <span className="text-indigo-600 dark:text-indigo-500">
-                  Let AI handle the translation.
+                  Powered by AI — no translators needed.
                 </span>
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Link
-                  href="/chat"
+                  href="/register"
                   className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white dark:text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Get started
@@ -49,14 +48,15 @@ export default function HomePage() {
 
             <div className="mt-16 flow-root sm:mt-24">
               <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-                <Image
-                  unoptimized
-                  src={DemoGif}
-                  alt="App screenshot"
-                  width={2432}
-                  height={1442}
-                  className="rounded-md shadow-2xl ring-1 ring-gray-900/10"
-                />
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="rounded-md shadow-2xl ring-1 ring-gray-900/10 w-full"
+                >
+                  <source src="/demo.webm" type="video/webm" />
+                </video>
               </div>
             </div>
           </div>

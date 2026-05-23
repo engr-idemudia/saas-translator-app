@@ -53,7 +53,7 @@ function ChatInput({ chatId }: { chatId: string }) {
 
     // We need to get the users current chats to check if they're about to exceed the PRO plan
     const messages = (await getDocs(limitedMessagesRef(chatId))).docs.map(
-      (doc) => doc.data()
+      (doc) => doc.data(),
     ).length;
 
     // check if the user is about to exceed the PRO plan which is 20 messages inside a chat
@@ -88,10 +88,20 @@ function ChatInput({ chatId }: { chatId: string }) {
       image: session.user.image || "",
     };
 
-    addDoc(messagesRef(chatId), {
+    const docRef = await addDoc(messagesRef(chatId), {
       input: values.input,
       timestamp: serverTimestamp(),
       user: userToStore,
+    });
+
+    await fetch("/api/chat/translate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chatId,
+        messageId: docRef.id,
+        input: values.input,
+      }),
     });
 
     form.reset();
