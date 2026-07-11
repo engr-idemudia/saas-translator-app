@@ -7,9 +7,18 @@ import useIsAdmin from "@/hooks/useAdminId";
 import UserAvatar from "./UserAvatar";
 import LoadingSpinner from "./loadingSpinner";
 
+function maskEmail(email: string) {
+  const [local, domain] = email.split("@");
+  if (!domain) return "•••";
+  const dotIndex = domain.lastIndexOf(".");
+  const name = domain.slice(0, dotIndex);
+  const tld = domain.slice(dotIndex); // includes the dot, e.g. ".com"
+  return `${local[0]}${"•".repeat(Math.max(local.length - 1, 1))}@${"•".repeat(name.length)}${tld}`;
+}
+
 function ChatMembersBadges({ chatId }: { chatId: string }) {
   const [members, loading, error] = useCollectionData<ChatMembers>(
-    chatMembersRef(chatId)
+    chatMembersRef(chatId),
   );
 
   const adminId = useIsAdmin({ chatId });
@@ -27,11 +36,14 @@ function ChatMembersBadges({ chatId }: { chatId: string }) {
               className="h-14 p-5 pl-2 pr-5 flex space-x-2"
             >
               <div className="flex items-center space-x-2">
-                <UserAvatar name={member.email} image={member.image} />
+                <UserAvatar
+                  name={maskEmail(member.email)}
+                  image={member.image}
+                />
               </div>
 
               <div>
-                <p>{member.email}</p>
+                <p>{maskEmail(member.email)}</p>
                 {member.userId === adminId && (
                   <p className="text-indigo-400 animate-pulse">Admin</p>
                 )}
