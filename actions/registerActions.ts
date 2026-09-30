@@ -12,7 +12,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function generatePortalLink() {
   const session = await getServerSession(authOptions);
-  const host = headers().get("host");
+  const host = (await headers()).get("host");
 
   if (!session?.user.id) return console.error("No user Id found");
   const {

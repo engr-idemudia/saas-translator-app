@@ -10,16 +10,18 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 type Props = {
-  params: {
+  params: Promise<{
     chatId: string;
-  };
+  }>;
 };
 
-async function Chats({ params: { chatId } }: Props) {
+async function Chats({ params }: Props) {
+  const { chatId } = await params;
+
   const session = await getServerSession(authOptions);
 
   const initialMessages = (await getDocs(sortedMessagesRef(chatId))).docs.map(
-    (doc) => doc.data()
+    (doc) => doc.data(),
   );
 
   const hasAccess = (await getDocs(chatMembersRef(chatId))).docs
@@ -32,7 +34,6 @@ async function Chats({ params: { chatId } }: Props) {
     <>
       <AdminControls chatId={chatId} />
       <ChatMembersBadges chatId={chatId} />
-
       <div className="flex-1">
         <ChatMessages
           chatId={chatId}

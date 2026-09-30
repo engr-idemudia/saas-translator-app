@@ -2,13 +2,14 @@ import ChatList from "@/components/ChatList";
 import ChatPermissionError from "@/components/ChatPermissionError";
 
 type Props = {
-  params: {};
-  searchParams: {
+  searchParams: Promise<{
     error: string;
-  };
+  }>;
 };
 
-async function App({ searchParams: { error } }: Props) {
+async function App({ searchParams }: Props) {
+  const { error } = await searchParams;
+
   return (
     <div>
       {error && (

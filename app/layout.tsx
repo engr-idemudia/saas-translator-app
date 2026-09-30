@@ -8,7 +8,7 @@ import FirebaseAuthProvider from "@/components/FirebaseAuthProvider";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "SaaS Translator — Real-Time Multi-Language Chat",
   description:
     "Real-time multi-language chat translation platform with free and Pro subscription tiers.",
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <ClientProviders>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className="flex flex-col min-h-screen">
           <FirebaseAuthProvider>
             <SubscriptionProvider>
